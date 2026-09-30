@@ -18,10 +18,12 @@ is embedded back into the governing equation via a differentiable implicit-expli
 
 # Requirements
 Python 3.9 or newer. 
+```
 numpy
 scipy
 torch
 matplotlib
+```
 
 
 # Problems
@@ -54,3 +56,6 @@ Coupled systems can also be run through their own runner, which is what
 python systems.py --system fhn_partial
 python systems.py --system predator_prey
 ```
+
+
+
