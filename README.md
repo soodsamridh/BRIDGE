@@ -2,10 +2,11 @@
 
 Reference implementation for:
 
-A Boundary-Layer-Aware Dual-GRU Framework for Reaction Identification and
-Solution of Singularly Perturbed Reaction-Diffusion Problems
+**A Boundary-Layer-Aware Dual-GRU Framework for Reaction Identification and
+Solution of Singularly Perturbed Reaction-Diffusion Problems**
 
 Samridh Sood, Subit Kumar Jain
+
 Department of Mathematics and Scientific Computing, National Institute of
 Technology Hamirpur, India
 
@@ -21,7 +22,6 @@ numpy
 scipy
 torch
 matplotlib
-
 
 
 # Problems
@@ -54,30 +54,3 @@ Coupled systems can also be run through their own runner, which is what
 python systems.py --system fhn_partial
 python systems.py --system predator_prey
 ```
-
-# Configuration
-
-Numerical and training settings live in `config.py` (scalar problems) and in
-`SYSTEM_CFGS` inside `systems.py` (coupled systems). The defaults reproduce
-the reported runs.
-
-Network. Two GRU encoders of hidden size 32, one over the outer region
-and one over the layer, blended by the continuous regime gate; FiLM
-conditioning into a 3-layer MLP of width 32 for the scalar problems, and an
-additive gate with SiLU for the coupled systems. 10,561 parameters for the
-scalar dual-encoder model.
-
-Training. Adam, learning rate 2e-3, weight decay 1e-5, gradient clipping
-1.0, 1000 epochs for the scalar problems and 2000 for the coupled systems,
-preceded by an MLP pre-initialisation stage. Loss is the sum of data, FD
-residual, consistency and equilibrium-anchor terms with weights 1.0, 3.0,
-1.0 and 5.0. TBPTT window 15 for the scalar problems and 1 for the coupled
-systems
-
-The spatial operator is the fourth-order compact Padé Laplacian in all four
-of its roles, reference generation, FD residual extraction, regime
-indicator and IMEX rollout, with Crank-Nicolson time stepping.
-
-The true reaction is used only to generate the reference trajectory and to
-score the identified law after training. It is never seen by the model
-during training.
